@@ -32,7 +32,13 @@ function speak()
     
     Webcam.attach(camera);
 
-    setTimeout(function() {take_snapshot(); save();}, 5000);
+    setTimeout(function() {take_snapshot("result1");var thingToSay = "Selfie will be taken again in the next 5 seconds!";
+
+    var utterThis = new SpeechSynthesisUtterance(thingToSay);
+
+    synth.speak(utterThis); save();}, 5000);
+
+    setTimeout(function() {take_snapshot("result2"); save();}, 10000);
 }
 
 camera = document.getElementById("camera");
@@ -44,10 +50,10 @@ Webcam.set({
     jpeg_quality: 90
 });
 
-function take_snapshot()
+function take_snapshot(img)
 {
     Webcam.snap(function(data_uri){
-        document.getElementById("result").innerHTML = "<img id='selfie_image' src='" + data_uri + "'></img>"
+        document.getElementById(img).innerHTML = "<img id='selfie_image' src='" + data_uri + "'></img>"
     });
 }
 
